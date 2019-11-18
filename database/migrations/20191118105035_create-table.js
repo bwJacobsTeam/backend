@@ -6,6 +6,7 @@ exports.up = function(knex) {
         tbl.string('first_name').notNullable();
         tbl.string('last_name').notNullable();
         tbl.string('address');
+        tbl.string('city');
         tbl.string('state');
         tbl.integer('zip_code');
         tbl.string('email')
@@ -17,6 +18,7 @@ exports.up = function(knex) {
         tbl.increments();
         tbl.string('organization_name').notNullable();
         tbl.string('address');
+        tbl.string('city');
         tbl.string('state');
         tbl.integer('zip_code');
         tbl.string('email').notNullable();
@@ -54,7 +56,7 @@ exports.up = function(knex) {
             .integer('supporter_id')
             .unsigned()
             .references('id')
-            .inTable('id')
+            .inTable('supporters')
             .onDelete('RESTRICT')
             .onUpdate('CASCADE');
         tbl
