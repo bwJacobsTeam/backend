@@ -4,7 +4,7 @@ module.exports = {
     client: 'sqlite3',
     useNullAsDefault: true,
     connection: {
-      filename: './database/saveananimal.db3'
+      filename: './database/db.db3'
     },
     pool: {
       afterCreate: (conn, done) => {
@@ -36,19 +36,17 @@ module.exports = {
   },
 
   production: {
-    client: 'postgresql',
-    connection: {
-      database: 'my_db',
-      user:     'username',
-      password: 'password'
-    },
+    client: "pg",
+    connection: process.env.DATABASE_URL,
     pool: {
       min: 2,
       max: 10
     },
     migrations: {
-      tableName: 'knex_migrations'
+      directory: "./database/migrations"
+    },
+    seeds: {
+      directory: "./database/seeds"
     }
   }
-
-};
+}
