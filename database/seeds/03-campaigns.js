@@ -9,6 +9,7 @@ exports.seed = function(knex) {
           urgency: 'medium',
           donation_goal: 1000000,
           organization_id: 1,
+          campaign_end: '2019-05-12'
         },
 
         {
@@ -19,6 +20,7 @@ exports.seed = function(knex) {
           urgency: 'high',
           donation_goal: 50000,
           organization_id: 1,
+          campaign_end: '2019-05-12'
         },
 
         {
@@ -29,6 +31,7 @@ exports.seed = function(knex) {
           urgency: 'low',
           donation_goal: 110,
           organization_id: 2,
+          campaign_end: '2019-05-12'
         },
 
         {
@@ -39,6 +42,7 @@ exports.seed = function(knex) {
           urgency: 'low',
           donation_goal: 5040000,
           organization_id: 3,
+          campaign_end: '2019-05-12'
         },
 
         {
@@ -49,6 +53,7 @@ exports.seed = function(knex) {
           urgency: 'medium',
           donation_goal: 10000,
           organization_id: 4,
+          campaign_end: '2019-05-12'
         },
       ]);
 };

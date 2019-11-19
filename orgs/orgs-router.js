@@ -18,6 +18,13 @@ router.post('/register', (req, res) => {
         });
 });
 
+router.get('/test', (req, res) => {
+    Orgs.getTest()
+        .then(user => {
+            res.status(201).json(user)
+        })
+})
+
 router.post('/login', (req, res) => {
     let { email, password } = req.body;
 
