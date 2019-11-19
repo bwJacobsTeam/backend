@@ -39,13 +39,15 @@ function findCampaign() {
     return db('campaigns as c')
         .join('donations as d', 'c.id', 'd.campaign_id')
         .select(
+            'c.id',
             'c.campaign_title',
             'c.description',
             'c.species',
             'c.location',
             'c.urgency',
             'c.donation_goal',
-            'c.campaign_end',
+            'c.campaign_end'
+            
         )
         
         
