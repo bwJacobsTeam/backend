@@ -2,7 +2,17 @@ const router = require("express").Router();
 const restricted = require('../auth/restricted-middleware.js');
 const Users = require('./users-model.js');
 
-router.get('/campaigns', restricted, (req, res) => {
+router.get('/id', (req,res) => {
+    Users.findUserById(req.params.id)
+        .then(user => {
+            res.status(200).json(user)
+        })
+        .catch(err => {
+            res.status(500).json(err)
+        });
+})
+
+router.get('/campaigns',  (req, res) => {
     Users.findCampaign()
         .then(user => {
             res.status(200).json(user)
@@ -10,6 +20,10 @@ router.get('/campaigns', restricted, (req, res) => {
         .catch(err => {
             res.status(500).json(err)
         });
+})
+
+router.get('/campaigns/:id', (req, res) => {
+    Users.findDonationsByCampaign
 })
 
 
