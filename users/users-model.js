@@ -6,7 +6,9 @@ module.exports = {
   findUserBy,
   findUserById,
   findCampaign,
-  findDonationsByUser
+  findDonationsByUser,
+  findCampaignByUser,
+  findDonationsByCampaign
 };
 
 function findUser() {
@@ -24,13 +26,25 @@ async function addUser(user) {
 }
 
 function findUserById(id) {
-  return db('users')
+  return db('users').select('id','first_name', 'last_name', 'organization_name', 'address', 'city', 'state', 'zip_code', 'email', 'role')
     .where({ id })
     .first();
 }
 
 function findCampaign() {
-    return db.select('*').from('campaigns')
+    return db('campaigns as c')
+        .join('donations as d', 'c.id', 'd.campaign_id')
+        .select(
+            'c.campaign_title',
+            'c.description',
+            'c.species',
+            'c.location',
+            'c.urgency',
+            'c.donation_goal',
+            'c.campaign_end',
+        )
+        
+        
 }
 
 function findDonationsByUser(user) {
@@ -46,4 +60,31 @@ function findDonationsByUser(user) {
                 'c.campaign_title',
                 )
         .where('u.id', user)
+}
+
+
+function findCampaignByUser(user) {
+    return db('campaigns as c')
+        .join('users as u', 'c.user_id', 'u.id')
+        .select(
+                'c.campaign_title',
+                'c.description',
+                'c.species',
+                'c.location',
+                'c.urgency',
+                'donation_goal',
+                'campaign_end',
+                'u.organization_name',
+                'u.first_name',
+                'u.last_name'
+        )
+}
+
+function findDonationsByCampaign(campaign){
+    return db('donations as d')
+        .join('campaigns as c', 'campaign_id', 'c.id')
+        .select(
+                'd.donation_amount',
+                'c.campaign_title'
+        )
 }
