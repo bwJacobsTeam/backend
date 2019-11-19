@@ -1,19 +1,19 @@
-const express = require("express");
-const cors = require("cors");
+const express = require('express');
+const cors = require('cors');
 
-const suppsRouter = require('../supporters/supporter-router.js');
-const orgsRouter = require('../orgs/orgs-router.js')
+const authRouter = require('../auth/auth-router.js');
+const usersRouter = require('../users/users-router.js');
 
 const server = express();
 
 server.use(express.json());
 server.use(cors());
 
-server.use("/api/supporters", suppsRouter);
-server.use("/api/organizations", orgsRouter);
+server.use('/api/auth', authRouter);
+server.use('/api/users', usersRouter);
 
-server.get("/", (req, res) => {
-    res.send("It's alive");
+server.get('/', (req, res) => {
+    res.send('Its alive');
   });
 
 module.exports = server;

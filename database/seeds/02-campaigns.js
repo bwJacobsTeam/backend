@@ -8,7 +8,7 @@ exports.seed = function(knex) {
           location: 'pacific ocean',
           urgency: 'medium',
           donation_goal: 1000000,
-          organization_id: 1,
+          user_id: 2,
           campaign_end: '2019-05-12'
         },
 
@@ -19,7 +19,7 @@ exports.seed = function(knex) {
           location: 'China/Himalayas',
           urgency: 'high',
           donation_goal: 50000,
-          organization_id: 1,
+          user_id: 3,
           campaign_end: '2019-05-12'
         },
 
@@ -30,7 +30,7 @@ exports.seed = function(knex) {
           location: 'oceans around the world',
           urgency: 'low',
           donation_goal: 110,
-          organization_id: 2,
+          user_id: 2,
           campaign_end: '2019-05-12'
         },
 
@@ -41,7 +41,7 @@ exports.seed = function(knex) {
           location: 'Southwestern United States and Mexico',
           urgency: 'low',
           donation_goal: 5040000,
-          organization_id: 3,
+          user_id: 3,
           campaign_end: '2019-05-12'
         },
 
@@ -52,7 +52,7 @@ exports.seed = function(knex) {
           location: 'Southern Florida',
           urgency: 'medium',
           donation_goal: 10000,
-          organization_id: 4,
+          user_id: 2,
           campaign_end: '2019-05-12'
         },
       ]);

@@ -1,6 +1,6 @@
 
 exports.seed = function(knex) {
-      return knex('supporters').insert([
+      return knex('users').insert([
         //1
         {
           first_name:'john',
@@ -10,7 +10,8 @@ exports.seed = function(knex) {
           state: 'ca',
           zip_code: 92563,
           email: 'j.watt10@gmail.com',
-          password: 'test'
+          password: 'test',
+          role: 'supporter'
         },
         // 2
         {
@@ -21,7 +22,9 @@ exports.seed = function(knex) {
           state: 'New Jersey',
           zip_code: 00000,
           email: 'iambatman@gmail.com',
-          password: 'test'
+          password: 'test',
+          role: 'organization',
+          organization_name: 'Wayne Ent.'
         },
         // 3
         {
@@ -32,7 +35,20 @@ exports.seed = function(knex) {
           state: 'ca',
           zip_code: 00000,
           email: 'iamironman@gmail.com',
-          password: 'test'
+          password: 'test123',
+          role: 'organization',
+          organization_name: 'Stark Industries'
+        },
+        {
+          first_name:'joseph',
+          last_name:'joe',
+          address:'12345 st.',
+          city: 'murrieta',
+          state: 'ca',
+          zip_code: 92563,
+          email: 'jjoe@aol.com',
+          password: 'password',
+          role: 'supporter'
         },
       ]);
 };
