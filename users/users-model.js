@@ -8,7 +8,10 @@ module.exports = {
   findCampaign,
   findDonationsByUser,
   findCampaignByUser,
-  findDonationsByCampaign
+  findCampaignDonations,
+  getCampaignByUser,
+  addDonation,
+  addCampaign
 };
 
 function findUser() {
@@ -72,19 +75,44 @@ function findCampaignByUser(user) {
                 'c.species',
                 'c.location',
                 'c.urgency',
-                'donation_goal',
-                'campaign_end',
+                'c.donation_goal',
+                'c.campaign_end',
                 'u.organization_name',
                 'u.first_name',
                 'u.last_name'
         )
+        .where('u.id', user)
 }
 
-function findDonationsByCampaign(campaign){
-    return db('donations as d')
-        .join('campaigns as c', 'campaign_id', 'c.id')
+function findCampaignDonations(campaign){
+    return db('campaigns as c')
+        .join('donations as d', 'c.id', 'd.campaign_id')
         .select(
                 'd.donation_amount',
                 'c.campaign_title'
         )
+        .where('c.id', campaign)
+}
+
+function getCampaignByUser(user){
+    return db('campaigns as c')
+        .join('users as u', 'c.user_id', 'u.id')
+        .select(
+                'c.campaign_title',
+                'c.description',
+                'c.species',
+                'c.location',
+                'c.urgency',
+                'c.donation_goal',
+                'c.campaign_end',
+        )
+        .where('c.user_id', user)
+}
+
+function addDonation(campaign, donation){
+    return db('donations').insert(donation)
+}
+
+function addCampaign(id, campaign){
+    return db('campaigns').insert(campaign)
 }
