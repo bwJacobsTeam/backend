@@ -28,7 +28,7 @@ router.post('/login', (req, res) => {
                 const token = getJwtToken(login.email);
 
                 res.status(201).json({
-                    message: `Welcome! Have a token!`,
+                    message: `Welcome, heres a token!`,
                     token
                 });
             } else {
