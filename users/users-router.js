@@ -22,8 +22,24 @@ router.get('/campaigns',  (req, res) => {
         });
 })
 
-router.get('/campaigns/:id', (req, res) => {
-    Users.findDonationsByCampaign
+router.get('/campaigns/:id/donationlist', (req, res) => {
+    Users.findCampaignDonations(req.params.id)
+        .then(camp => {
+            res.status(200).json(camp)
+        })
+        .catch(err => {
+            res.status(500).json(err)
+        });
+})
+
+router.post('/campaigns/:id/donationlist', (req, res) => {
+    Users.addDonation(req.params.id, req.body)
+        .then(dono => {
+            res.status(200).json({message: 'Donation added'})
+        })
+        .catch(err => {
+            res.status(500).json(err)
+        })
 })
 
 
@@ -35,6 +51,26 @@ router.get('/:id/donations',  (req, res) => {
         .catch(err => {
             res.status(500).json(err)
         });
+})
+
+router.get('/:id/campaignlist', (req, res) => {
+    Users.getCampaignByUser(req.params.id)
+        .then(user => {
+            res.status(200).json(user)
+        })
+        .catch(err => {
+            res.status(500).json(err)
+        });
+})
+
+router.post('/:id/campaignlist', (req,res) => {
+    Users.addCampaign(req.params.id, req.body)
+        .then(camp => {
+            res.status(200).json({message: 'Campaign added successfully'})
+        })
+        .catch(err => {
+            res.status(500).json(err)
+        })
 })
 
 
