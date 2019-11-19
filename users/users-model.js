@@ -8,6 +8,7 @@ module.exports = {
   findCampaign,
   findDonationsByUser,
   findCampaignByUser,
+  findCampaignById,
   findCampaignDonations,
   getCampaignByUser,
   addDonation,
@@ -115,4 +116,8 @@ function addDonation(campaign, donation){
 
 function addCampaign(id, campaign){
     return db('campaigns').insert(campaign)
+}
+
+function findCampaignById(id){
+  return db('campaigns').where({id})
 }

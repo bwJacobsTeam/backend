@@ -12,6 +12,16 @@ router.get('/id', (req,res) => {
         });
 })
 
+router.get('/campaigns/:id', (req,res) => {
+    Users.findCampaignById(req.params.id)
+        .then(user => {
+            res.status(200).json(user)
+        })
+        .catch(err => {
+            res.status(500).json(err)
+        });
+})
+
 router.get('/campaigns',  (req, res) => {
     Users.findCampaign()
         .then(user => {
@@ -21,6 +31,8 @@ router.get('/campaigns',  (req, res) => {
             res.status(500).json(err)
         });
 })
+
+
 
 router.get('/campaigns/:id/donationlist', (req, res) => {
     Users.findCampaignDonations(req.params.id)
