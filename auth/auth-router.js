@@ -27,10 +27,12 @@ router.post("/register", (req, res) => {
         if (user && bcrypt.compareSync(password, user.password)) {
 
           const token = getJwtToken(user.email);
-
+          const role = user.role;
           res.status(200).json({
             message: `Welcome ${user.first_name}! have a token...`,
-            token
+            token,
+            role
+            
           });
         } else {
           res.status(401).json({ message: "Invalid Credentials" });
