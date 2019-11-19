@@ -1,9 +1,10 @@
 exports.up = function(knex) {
     return knex.schema
-      .createTable('supporters', tbl => {
+      .createTable('users', tbl => {
           tbl.increments();
           tbl.string('first_name').notNullable();
           tbl.string('last_name').notNullable();
+          tbl.string('organization_name');
           tbl.string('address');
           tbl.string('city');
           tbl.string('state');
@@ -12,16 +13,7 @@ exports.up = function(knex) {
               .unique()
               .notNullable();
           tbl.string('password', 18).notNullable();
-      })
-      .createTable('organizations', tbl => {
-          tbl.increments();
-          tbl.string('organization_name').notNullable();
-          tbl.string('address');
-          tbl.string('city');
-          tbl.string('state');
-          tbl.integer('zip_code');
-          tbl.string('email').notNullable();
-          tbl.string('password').notNullable();
+          tbl.string('role').notNullable();
       })
       .createTable('campaigns', tbl => {
           tbl.increments();
@@ -33,30 +25,23 @@ exports.up = function(knex) {
           tbl.string('species').notNullable();
           tbl.string('location').notNullable();
           tbl.string('urgency').notNullable();
-          tbl.float('donation_goal').notNullable();
+          tbl.integer('donation_goal').notNullable();
           tbl
-              .integer('organization_id')
+              .integer('user_id')
               .unsigned()
               .references('id')
-              .inTable('organizations')
+              .inTable('users')
               .onDelete('RESTRICT')
               .onUpdate('CASCADE');
             tbl.date('campaign_end');
       })
       .createTable('donations', tbl => {
           tbl.increments();
-          tbl 
-              .integer('organization_id')
-              .unsigned()
-              .references('id')
-              .inTable('organizations')
-              .onDelete('RESTRICT')
-              .onUpdate('CASCADE');
           tbl
-              .integer('supporter_id')
+              .integer('user_id')
               .unsigned()
               .references('id')
-              .inTable('supporters')
+              .inTable('users')
               .onDelete('RESTRICT')
               .onUpdate('CASCADE');
           tbl
@@ -66,14 +51,13 @@ exports.up = function(knex) {
               .inTable('campaigns')
               .onDelete('RESTRICT')
               .onUpdate('CASCADE');
-          tbl.float('donation_amount').notNullable();
+          tbl.integer('donation_amount').notNullable();
       })
   };
   
   exports.down = function(knex) {
     return knex.schema
-      .dropTableIfExists('supporters')
-      .dropTableIfExists('organizations')
+      .dropTableIfExists('users')
       .dropTableIfExists('campaigns')
       .dropTableIfExists('donations');
   };
