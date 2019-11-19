@@ -13,7 +13,7 @@ server.use("/api/supporters", suppsRouter);
 server.use("/api/organizations", orgsRouter);
 
 server.get("/", (req, res) => {
-    res.send("It's alive!");
+    res.send("It's alive");
   });
 
 module.exports = server;
