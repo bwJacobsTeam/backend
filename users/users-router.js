@@ -22,6 +22,16 @@ router.get('/campaigns/:id', (req,res) => {
         });
 })
 
+router.delete('/campaigns/:id', (req,res) => {
+    Users.deleteCampaign(req.params.id)
+    .then(camp => {
+        res.status(200).json({message: `${camp.campaign_title} has been removed`})
+    })
+    .catch(err => {
+        res.status(500).json({error: 'Error removing campaign'})
+    })
+})
+
 router.get('/campaigns',  (req, res) => {
     Users.findCampaign()
         .then(user => {
@@ -85,15 +95,7 @@ router.post('/:id/campaignlist', (req,res) => {
         })
 })
 
-router.delete('/:id/campaignlist', (req,res) => {
-    Users.deleteCampaign(req.params.id)
-    .then(camp => {
-        res.status(200).json({message: `${camp.campaign_title} has been removed`})
-    })
-    .catch(err => {
-        res.status(500).json({error: 'Error removing campaign'})
-    })
-})
+
 
 
 
