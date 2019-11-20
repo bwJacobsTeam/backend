@@ -55,3 +55,4 @@ function addDonation(campaign, donation){
 function findById(id){
     return db('campaigns').where({id})
   }
+

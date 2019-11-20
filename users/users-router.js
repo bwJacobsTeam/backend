@@ -68,4 +68,28 @@ router.get('/:id/donations', restricted, (req, res) => {
         })
 })
 
+/**
+ * @swagger
+ * /users/:id/campaigns:
+ *  get:
+ *    description: Use to request all campaigns a user has made
+ *    responses:
+ *      '200':
+ *        description: A successful response, users campaigns provided
+ *  
+ *      
+ *
+ *
+ */ 
+
+router.get('/:id/campaigns', (req, res) => {
+    Users.findCampaignByUser(req.params.id)
+        .then(user => {
+            res.status(200).json(user);
+        })
+        .catch(err => {
+            res.status(500).json(user);
+        });
+})
+
 module.exports = router;

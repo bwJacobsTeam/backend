@@ -6,7 +6,8 @@ module.exports = {
   findUserBy,
   findUserById,
   updateUser,
-  findDonations
+  findDonations,
+  findCampaignByUser
 };
 
 async function addUser(user) {
@@ -61,4 +62,19 @@ function findDonations(user) {
       .where('u.id', user)
 }
 
+function findCampaignByUser(id) {
+  return db('campaigns as c')
+      .join('users as u', 'c.user_id', 'u.id')
+      .select(
+          'u.organization_name',
+          'c.campaign_title',
+          'c.description',
+          'c.location',
+          'c.species',
+          'c.urgency',
+          'c.donation_goal',
+          'c.campaign_end'
+      )
+      .where('u.id', id)
+}
 
