@@ -1,33 +1,37 @@
 const db = require('../database/dbConfig.js');
 
 module.exports = {
-  addUser,
   findUser,
+  addUser,
   findUserBy,
   findUserById,
-  findCampaign,
-  findDonationsByUser,
-  findCampaignByUser,
-  findCampaignById,
-  findCampaignDonations,
-  getCampaignByUser,
-  addDonation,
-  addCampaign,
-  deleteCampaign
+  updateUser,
+  findDonations
 };
-
-function findUser() {
-  return db('users').select('id', 'email', 'password');
-}
-
-function findUserBy(filter) {
-  return db('users').where(filter);
-}
 
 async function addUser(user) {
   const [id] = await db('users').insert(user);
 
   return findUserById(id);
+}
+
+  function findUserBy(filter) {
+    return db('users').where(filter);
+  }
+
+function findUser(id) {
+  return db('users')
+    .select(
+      'id',
+      'email', 
+      'first_name', 
+      'last_name',
+      'role',
+      'address',
+      'city',
+      'state',
+    )
+    .where({id})
 }
 
 function findUserById(id) {
@@ -36,101 +40,25 @@ function findUserById(id) {
     .first();
 }
 
-function findCampaign() {
-    return db('campaigns as c')
-        .join('donations as d', 'c.id', 'd.campaign_id')
-        .select(
-            'c.id',
-            'c.campaign_title',
-            'c.description',
-            'c.species',
-            'c.location',
-            'c.urgency',
-            'c.donation_goal',
-            'c.campaign_end'
-            
-        )
-        
-        
-}
-
-function findDonationsByUser(user) {
-    return db('users as u')
-        
-        .join('donations as d', 'u.id', 'd.user_id')
-        .join('campaigns as c', 'd.campaign_id', 'c.id')
-        .select(
-                'u.first_name',
-                'u.last_name',
-                'u.organization_name',
-                'd.donation_amount',
-                'c.campaign_title',
-                )
-        .where('u.id', user)
-}
-
-
-function findCampaignByUser(user) {
-    return db('campaigns as c')
-        .join('users as u', 'c.user_id', 'u.id')
-        .select(
-                'c.campaign_title',
-                'c.description',
-                'c.species',
-                'c.location',
-                'c.urgency',
-                'c.donation_goal',
-                'c.campaign_end',
-                'u.organization_name',
-                'u.first_name',
-                'u.last_name'
-        )
-        .where('u.id', user)
-}
-
-function findCampaignDonations(campaign){
-    return db('campaigns as c')
-        .join('donations as d', 'c.id', 'd.campaign_id')
-        .join('users as u', 'c.user_id', 'u.id')
-        .select(
-                'd.donation_amount',
-                'c.campaign_title',
-                'u.first_name',
-                'u.last_name',
-                'u.role'
-        )
-        .where('c.id', campaign)
-}
-
-function getCampaignByUser(user){
-    return db('campaigns as c')
-        .join('users as u', 'c.user_id', 'u.id')
-        .select(
-                'c.campaign_title',
-                'c.description',
-                'c.species',
-                'c.location',
-                'c.urgency',
-                'c.donation_goal',
-                'c.campaign_end',
-        )
-        .where('c.user_id', user)
-}
-
-function addDonation(campaign, donation){
-    return db('donations').insert(donation)
-}
-
-function addCampaign(id, campaign){
-    return db('campaigns').insert(campaign)
-}
-
-function findCampaignById(id){
-  return db('campaigns').where({id})
-}
-
-function deleteCampaign() {
-  return db('campaigns')
+function updateUser(id, changes) {
+  return db('users')
     .where({id})
-    .del();
+    .update(changes, '*');
 }
+
+function findDonations(user) {
+  return db('users as u')
+      
+      .join('donations as d', 'u.id', 'd.user_id')
+      .join('campaigns as c', 'd.campaign_id', 'c.id')
+      .select(
+              'u.first_name',
+              'u.last_name',
+              'u.organization_name',
+              'd.donation_amount',
+              'c.campaign_title',
+              )
+      .where('u.id', user)
+}
+
+

@@ -31,7 +31,7 @@ exports.up = function(knex) {
               .unsigned()
               .references('id')
               .inTable('users')
-              .onDelete('RESTRICT')
+              .onDelete('CASCADE')
               .onUpdate('CASCADE');
             tbl.date('campaign_end');
       })
@@ -49,7 +49,7 @@ exports.up = function(knex) {
               .unsigned()
               .references('id')
               .inTable('campaigns')
-              .onDelete('RESTRICT')
+              .onDelete('CASCADE')
               .onUpdate('CASCADE');
           tbl.integer('donation_amount').notNullable();
       })
