@@ -16,7 +16,7 @@ const swaggerOptions = {
   swaggerDefinition: {
       info: {
           title: 'Save An Animal API',
-          description: 'Save An Animal API Information',
+          description: 'https://saveananimal.herokuapp.com/api',
           contact: {
               name: 'John Watt'
           },

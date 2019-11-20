@@ -4,7 +4,7 @@ const Users = require('./users-model.js');
 
 /**
  * @swagger
- * /api/users/:id:
+ * /users/:id:
  *  get:
  *    description: Use to request user information based off user id
  *    responses:
@@ -24,7 +24,7 @@ router.get('/:id', restricted, (req, res) => {
 
 /**
  * @swagger
- * /api/users/:id:
+ * /users/:id:
  *  put:
  *    description: Use to update user information
  *    responses:
@@ -45,7 +45,7 @@ router.put('/:id', restricted, (req,res) => {
 
 /**
  * @swagger
- * /api/users/:id/donations:
+ * /users/:id/donations:
  *  get:
  *    description: Use to request all donations a user has made
  *    responses:
