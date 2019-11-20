@@ -45,7 +45,7 @@ router.post('/', (req,res) => {
 
 /**
  * @swagger
- * /campaigns/:id:
+ * /api/campaigns/:id:
  *  get:
  *    description: Use to find a specific campaign by id
  *    responses:
@@ -65,7 +65,7 @@ router.get('/:id', (req,res) => {
 
 /**
  * @swagger
- * /campaigns/:id:
+ * /api/campaigns/:id:
  *  delete:
  *    description: Use to delete a campaign
  *    responses:
@@ -85,7 +85,7 @@ router.delete('/:id', (req,res) => {
 
 /**
  * @swagger
- * /campaigns/:id:
+ * /api/campaigns/:id:
  *  put:
  *    description: Use to update a specific campaign
  *    responses:
@@ -105,7 +105,7 @@ router.put('/:id', (req, res) => {
 
 /**
  * @swagger
- * /campaigns/:id/donations:
+ * /api/campaigns/:id/donations:
  *  get:
  *    description: Use to get a list of donations for a campaign
  *    responses:
@@ -125,7 +125,7 @@ router.get('/:id/donations', (req, res) => {
 
 /**
  * @swagger
- * /campaigns/:id/donations:
+ * /api/campaigns/:id/donations:
  *  post:
  *    description: Use to add a new donation
  *    responses:
