@@ -90,9 +90,13 @@ function findCampaignByUser(user) {
 function findCampaignDonations(campaign){
     return db('campaigns as c')
         .join('donations as d', 'c.id', 'd.campaign_id')
+        .join('users as u', 'c.user_id', 'u.id')
         .select(
                 'd.donation_amount',
-                'c.campaign_title'
+                'c.campaign_title',
+                'u.first_name',
+                'u.last_name',
+                'u.role'
         )
         .where('c.id', campaign)
 }
