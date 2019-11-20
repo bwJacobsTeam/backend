@@ -78,11 +78,21 @@ router.get('/:id/campaignlist', (req, res) => {
 router.post('/:id/campaignlist', (req,res) => {
     Users.addCampaign(req.params.id, req.body)
         .then(camp => {
-            res.status(200).json({message: 'Campaign added successfully'})
+            res.status(201).json({message: 'Campaign added successfully'})
         })
         .catch(err => {
             res.status(500).json(err)
         })
+})
+
+router.delete('/:id/campaignlist', (req,res) => {
+    Users.deleteCampaign(req.params.id)
+    .then(camp => {
+        res.status(200).json({message: `${camp.campaign_title} has been removed`})
+    })
+    .catch(err => {
+        res.status(500).json({error: 'Error removing campaign'})
+    })
 })
 
 

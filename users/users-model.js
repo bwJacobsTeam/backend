@@ -12,7 +12,8 @@ module.exports = {
   findCampaignDonations,
   getCampaignByUser,
   addDonation,
-  addCampaign
+  addCampaign,
+  deleteCampaign
 };
 
 function findUser() {
@@ -126,4 +127,10 @@ function addCampaign(id, campaign){
 
 function findCampaignById(id){
   return db('campaigns').where({id})
+}
+
+function deleteCampaign() {
+  return db('campaigns')
+    .where({id})
+    .del();
 }
