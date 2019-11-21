@@ -76,6 +76,6 @@ function findCampaignByUser(id) {
           'c.donation_goal',
           'c.campaign_end'
       )
-      .where('u.id', id)
+      .where('c.user_id', id)
 }
 
