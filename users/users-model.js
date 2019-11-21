@@ -66,6 +66,7 @@ function findCampaignByUser(id) {
   return db('campaigns as c')
       .join('users as u', 'c.user_id', 'u.id')
       .select(
+          'c.id',
           'u.organization_name',
           'c.campaign_title',
           'c.description',

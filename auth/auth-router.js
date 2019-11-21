@@ -31,9 +31,9 @@ router.post("/register", (req, res) => {
           const id = user.id;
           res.status(200).json({
             message: `Welcome ${user.first_name}! have a token...`,
-            id,
             token,
             role,
+            id,
             
             
           });
