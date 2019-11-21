@@ -28,10 +28,12 @@ router.post("/register", (req, res) => {
 
           const token = getJwtToken(user.email);
           const role = user.role;
+          const user_id = user.id;
           res.status(200).json({
             message: `Welcome ${user.first_name}! have a token...`,
             token,
-            role
+            role,
+            id
             
           });
         } else {
